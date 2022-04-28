@@ -441,7 +441,7 @@ test your code.
 
 39.  How many times does sequence "GATTACA" appear in this fasta file? `/reference/homo_sapiens/hg38/ucsc_assembly/illumina_download/Sequence/WholeGenomeFasta/genome.fa`
 
-```{verbatim, }
+```{verbatim}
 grep -i "GATTACA" genome.fa > results.txt > wc -l 
 610638
 ```
@@ -450,7 +450,9 @@ grep -i "GATTACA" genome.fa > results.txt > wc -l
 40.  Use this gtf file (`/reference/homo_sapiens/hg38/ucsc_assembly/illumina_download/Annotation/Genes/genes.gtf`)
 and the Unix `awk` command to keep only the lines where first column is "chr11"
 and the fourth column is greater than 100,000. How many lines are in the output?
+```{verbatim}
 
+```
 ------------------------------------------------------------------------
 
 # I hate myself - 5 point per question
