@@ -83,6 +83,9 @@ library(dplyr)
 price = c(2,5)
 
 df_2 = cbind(df, price)
+#MVC#########################################################################
+# You can also do it this way:
+df_2$new_col <- c(2, 0)
 df_2
 ```
 
@@ -117,6 +120,9 @@ scatterplot
 
 ```{r}
 mtcars$cyl = factor(mtcars$cyl, levels = c(4,6,8))
+#MVC############################################################################
+# Unless you want to explicitly change the level order, you don't need to use
+# levels =...
 
 boxplot = ggplot(mtcars, aes(x = cyl, y = hp)) + 
   geom_boxplot()
@@ -285,9 +291,19 @@ scatterplot
 24.  From the previous plot, include a legend for point colors and make the
 title of the legend "Cylinder".
 ```{r}
-scatterplot = ggplot(mtcars, aes(x=disp, y=mpg, color = cyl)) + 
-  geom_point()+
-  scale_color_manual(values = c("#CC79A7", "#0072B2", "#D55E00"), name = "Cylinder")+
+#MVC#################################################################################
+# Just a style suggestion, check out https://style.tidyverse.org/ to make more
+# readable code. Long lines of code can tricky. Any time I have > 2 arguments
+# or elements of a list I split it up across multiple lines
+scatterplot = ggplot(mtcars,
+                     aes(x = disp,
+                         y = mpg,
+                         color = cyl)) + 
+  geom_point() +
+  scale_color_manual(values = c("#CC79A7",
+                                "#0072B2",
+                                "#D55E00"),
+                     name = "Cylinder") +
   ggtitle("Mpg vs Displacement Scatterplot")
 scatterplot
 ```
@@ -397,7 +413,7 @@ hist_disp = ggplot(mtcars, aes(y=disp)) +
 library(cowplot)
 plot1 = cowplot::plot_grid(hist_mpg, NULL,  scatterplot, hist_disp, rel_heights=c(0.2, 0.8), rel_widths = c(0.8, 0.2), ncol = 2, align = "vh")+theme(aspect.ratio = 0.9)
 plot1
-
+#MVC nice!
 ```
 
 
@@ -407,6 +423,10 @@ plot1
 repository
 ```{verbatim}
 wget https://sra-downloadb.be-md.ncbi.nlm.nih.gov/sos3/sra-pub-run-21/SRR10197556/SRR10197556.1
+#MVC###################################################################################
+# This works. You can also do this:
+prefetch SRR10197556
+fasterq-dump -S SRR10197556
 ```
 
 ## Bash variable expansion
@@ -451,6 +471,10 @@ test your code.
 grep -io "GATTACA" genome.fa | wc -l 
 
 611584 times
+#MVC#############################################################################
+# Close! the bit that makes this a hard question is that since the fasta file has
+# wrapped sequences, any pattern that starts on one line and is split to the next
+# line will not be picked up by this method
 ```
 ## Using awk
 
